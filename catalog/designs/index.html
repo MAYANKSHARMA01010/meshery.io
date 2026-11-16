@@ -24,12 +24,12 @@
 <meta property="og:url" content="https://meshery.io/catalog/designs/" />
 <meta property="og:site_name" content="Meshery" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2026-10-26T09:52:38+00:00" />
-<meta property="article:modified_time" content="2026-10-26T09:52:38+00:00" />
+<meta property="article:published_time" content="2026-11-16T03:57:16+00:00" />
+<meta property="article:modified_time" content="2026-11-16T03:57:16+00:00" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Meshery Design Catalog" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-10-26T09:52:38+00:00","datePublished":"2026-10-26T09:52:38+00:00","description":"Browse ready-made, well-architected designs for Kubernetes and cloud infrastructure. Search, filter by category and technology, and open any design in Meshery.","headline":"Meshery Design Catalog","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/catalog/designs/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/catalog/designs/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-11-16T03:57:16+00:00","datePublished":"2026-11-16T03:57:16+00:00","description":"Browse ready-made, well-architected designs for Kubernetes and cloud infrastructure. Search, filter by category and technology, and open any design in Meshery.","headline":"Meshery Design Catalog","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/catalog/designs/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/catalog/designs/"}</script>
 <!-- End Jekyll SEO tag -->
  <link type="application/atom+xml" rel="alternate" href="https://meshery.io/feed.xml" title="Meshery" /> 
     <link rel="stylesheet" href="/css/stellarnav.css" />
@@ -77,7 +77,9 @@
       </script>
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+      integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN"
+      crossorigin="anonymous"
     />
     <link rel="stylesheet" href="/css/subscribe.css" />
 
@@ -100,12 +102,27 @@
   </head>
  
     <body style="overflow-x: hidden" class="dark-mode">
+      <a href="#main-content" class="skip-to-content">Skip to main content</a>
 
       <script>
         
         window.siteBaseUrl = "";
 
         const body = document.body;
+
+        const BANNER_KEY = "sitewideBannerDismissed";
+
+        function isBannerDismissed() {
+            try {
+              return localStorage.getItem(BANNER_KEY) === "true";
+            } catch {
+              return false;
+            }
+          }
+
+        if (isBannerDismissed()) {
+            document.documentElement.classList.add("banner-dismissed");
+          }
     
         if (localStorage.getItem("mode") === "light-mode") {
           body.classList.remove("dark-mode");
@@ -113,15 +130,15 @@
           let allLogos = document.querySelectorAll("#logo-dark-light, .logo-dark-light");
           allLogos.forEach(e => e.src = e.dataset.logoForLight);
         }
-    
+
         // Automatically set logos based on initial theme
         document.addEventListener('DOMContentLoaded', () => {
           let allLogos = document.querySelectorAll("#logo-dark-light, .logo-dark-light");
           allLogos.forEach(e => {
             e.src = body.classList.contains("dark-mode") ? e.dataset.logoForDark : e.dataset.logoForLight;
           });
-          
-          // emit the theme event 
+
+          // emit the theme event
           document.dispatchEvent(new CustomEvent("themeChange",{
 			      detail : {value : localStorage.getItem("mode")},
 			      bubbles: true ,
@@ -132,14 +149,25 @@
         document.addEventListener("DOMContentLoaded", function() {
           // $('.sitewide-banner').animate({top: 0});
           const banner = document.querySelector(".sitewide-banner");
-          if (!banner) {
+          if (!banner || isBannerDismissed()) {
             return;
           }
           setTimeout(function() {
             banner.classList.remove("hidden");
             
           }, 0); // Add a delay of 1 second before showing the banner
+
+        const closeBtn = banner.querySelector(".banner-close");
+          if (closeBtn) {
+            closeBtn.addEventListener("click", function () {
+              banner.classList.add("dismissed");
+              try {
+                localStorage.setItem(BANNER_KEY, "true");
+              } catch { }
+            });
+          };
         });
+
       </script>
 
     
@@ -155,6 +183,9 @@
   <p>
     <a href="https://www.cncf.io/blog/2026/10/07/meshery-becomes-a-cncf-incubating-project/">Read the announcement</a>
   </p>
+  <button class="banner-close" type="button" aria-label="close announcement button">
+    &times;
+  </button>
 </div>
 <header id="mainHeader" class="filledHeader">
   
@@ -162,7 +193,7 @@
     <div class="container nav-container">
   
       <div class="project-name">
-        <a href="/">
+        <a href="/" >
           <img src="/assets/images/logos/meshery-logo.png" alt="Meshery Logo" />&nbsp;
           <img src="/assets/images/logos/meshery-logo-text.png"
             data-logo-for-dark="/assets/images/logos/meshery-logo-text.png"
@@ -523,6 +554,7 @@
   </header>
 
 
+<main id="main-content" tabindex="-1">
 <div class="content">
 	<section class="page">
 		<div class="container ">
@@ -1108,6 +1140,33 @@
                 
               </ul>
               <p class="cstore-meta">By sonal singh <span aria-hidden="true">&middot;</span> Aug 16, 2023</p>
+            </div>
+          </a>
+        </li>
+        
+      
+        
+        
+        
+        
+        
+        
+        <li class="cstore-card" data-name="Portable Ai Interface gateway" data-type="deployment" data-tech="kubernetes" data-created="2026-11-09 17:17:14 +0000" data-text="portable ai interface gateway a kubernetes-based reference architecture for deploying a portable ai inference gateway. the design provides a centralized entry point for inference requests and routes traffic to an independently managed model-serving backend.it includes an ingress resource for external access, gateway and model-server deployments, services for internal communication, and supporting resources for configuration management, identity, security, autoscaling, and availability.the architecture demonstrates how ai inference workloads can be organized using kubernetes-native components while maintaining separation between request routing and model serving. it is intended as a reusable starting point for teams building self-hosted ai inference infrastructure. aditya verma kubernetes">
+          <a class="cstore-card-link" href="/catalog/deployment/portable-ai-interface-gateway-11c27e2d-7354-4eff-a7f1-4e6a65fe1e3b.html">
+            <div class="cstore-thumb">
+              <img alt="Snapshot of the Portable Ai Interface gateway design" loading="lazy"
+                src="https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/11c27e2d-7354-4eff-a7f1-4e6a65fe1e3b-light.png"
+                onerror="this.onerror=null;this.src='/assets/images/brand/meshery-logo.svg';this.parentNode.classList.add('cstore-thumb-fallback')">
+              <span class="cstore-badge">deployment</span>
+            </div>
+            <div class="cstore-body">
+              <h3 class="cstore-name">Portable Ai Interface gateway</h3>
+              <p class="cstore-desc">A Kubernetes-based reference architecture for deploying a portable AI inference gateway. The design provides a centra...</p>
+              <ul class="cstore-chips" aria-label="Technologies">
+                <li>kubernetes</li>
+                
+              </ul>
+              <p class="cstore-meta">By Aditya Verma <span aria-hidden="true">&middot;</span> Nov 9, 2026</p>
             </div>
           </a>
         </li>
@@ -5098,6 +5157,33 @@
         
         
         
+        <li class="cstore-card" data-name="kubecon-grabnerandi-design" data-type="deployment" data-tech="kubernetes" data-created="2026-11-12 21:18:42 +0000" data-text="kubecon-grabnerandi-design test design created during meshery contribfest andreas grabner kubernetes">
+          <a class="cstore-card-link" href="/catalog/deployment/kubecon-grabnerandi-design-85e4434e-0c4a-497f-801e-4f69d2fdc149.html">
+            <div class="cstore-thumb">
+              <img alt="Snapshot of the kubecon-grabnerandi-design design" loading="lazy"
+                src="https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/85e4434e-0c4a-497f-801e-4f69d2fdc149-light.png"
+                onerror="this.onerror=null;this.src='/assets/images/brand/meshery-logo.svg';this.parentNode.classList.add('cstore-thumb-fallback')">
+              <span class="cstore-badge">deployment</span>
+            </div>
+            <div class="cstore-body">
+              <h3 class="cstore-name">kubecon-grabnerandi-design</h3>
+              <p class="cstore-desc">test design created during meshery contribfest</p>
+              <ul class="cstore-chips" aria-label="Technologies">
+                <li>kubernetes</li>
+                
+              </ul>
+              <p class="cstore-meta">By Andreas Grabner <span aria-hidden="true">&middot;</span> Nov 12, 2026</p>
+            </div>
+          </a>
+        </li>
+        
+      
+        
+        
+        
+        
+        
+        
         <li class="cstore-card" data-name="Pod Volume Mount SubPath-expr" data-type="deployment" data-tech="kubernetes" data-created="2024-01-17 05:40:40 +0000" data-text="pod volume mount subpath-expr this design demonstrates the usage of kubernetes&#39; subpathexpr feature to mount a specific sub-path of a volume into a container within a pod. this approach allows for more dynamic and flexible volume mounts, enabling containers to access different parts of a volume based on environment variables or pod metadata. by utilizing subpathexpr, kubernetes administrators and developers can configure pods to mount unique directories tailored to the specific needs of each container, without needing to create multiple volume definitions. this design is particularly useful in scenarios where you need to differentiate storage paths for various instances of an application or manage data separation within shared volumes. ripul handoo kubernetes">
           <a class="cstore-card-link" href="/catalog/deployment/pod-volume-mount-subpath-expr-8652b112-80d7-4fde-bc87-9d2dbd4327cc.html">
             <div class="cstore-thumb">
@@ -9060,33 +9146,6 @@
         
         
         
-        <li class="cstore-card" data-name="KEDA Setup" data-type="resiliency" data-tech="keda" data-created="2024-06-20 13:54:18 +0000" data-text="keda setup keda is a kubernetes-based event driven autoscaling component. it provides event driven scale for any container running in kubernetes. the design deploys essential keda components (including crds) to ensure your cluster is properly setup for autoscaling using keda. lee calcote keda">
-          <a class="cstore-card-link" href="/catalog/resiliency/keda-setup-378da4da-dc81-4b6f-9473-fc91b5ce88e1.html">
-            <div class="cstore-thumb">
-              <img alt="Snapshot of the KEDA Setup design" loading="lazy"
-                src="https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/378da4da-dc81-4b6f-9473-fc91b5ce88e1-light.png"
-                onerror="this.onerror=null;this.src='/assets/images/brand/meshery-logo.svg';this.parentNode.classList.add('cstore-thumb-fallback')">
-              <span class="cstore-badge">resiliency</span>
-            </div>
-            <div class="cstore-body">
-              <h3 class="cstore-name">KEDA Setup</h3>
-              <p class="cstore-desc">KEDA is a Kubernetes-based Event Driven Autoscaling component. It provides event driven scale for any container runni...</p>
-              <ul class="cstore-chips" aria-label="Technologies">
-                <li>keda</li>
-                
-              </ul>
-              <p class="cstore-meta">By Lee Calcote <span aria-hidden="true">&middot;</span> Jun 20, 2024</p>
-            </div>
-          </a>
-        </li>
-        
-      
-        
-        
-        
-        
-        
-        
         <li class="cstore-card" data-name="Argo CD w/Dex" data-type="resiliency" data-tech="argo-cd|argocd-operator" data-created="2024-01-23 21:26:55 +0000" data-text="argo cd w/dex the argo cd server component exposes the api and ui. the operator creates a service to expose this component and can be accessed through the various methods available in kubernetes. lee calcote argo-cd|argocd-operator">
           <a class="cstore-card-link" href="/catalog/resiliency/argo-cd-w-dex-4690406b-60e7-4c82-87c3-20b22862f5b5.html">
             <div class="cstore-thumb">
@@ -10577,6 +10636,33 @@
         
         
         
+        <li class="cstore-card" data-name="kubecon-tommatime-design" data-type="workloads" data-tech="kubernetes" data-created="2026-11-12 21:17:58 +0000" data-text="kubecon-tommatime-design sample design from contribfest thomas gleason kubernetes">
+          <a class="cstore-card-link" href="/catalog/workloads/kubecon-tommatime-design-13edb601-381a-411f-83dd-61e44f5268d4.html">
+            <div class="cstore-thumb">
+              <img alt="Snapshot of the kubecon-tommatime-design design" loading="lazy"
+                src="https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/13edb601-381a-411f-83dd-61e44f5268d4-light.png"
+                onerror="this.onerror=null;this.src='/assets/images/brand/meshery-logo.svg';this.parentNode.classList.add('cstore-thumb-fallback')">
+              <span class="cstore-badge">workloads</span>
+            </div>
+            <div class="cstore-body">
+              <h3 class="cstore-name">kubecon-tommatime-design</h3>
+              <p class="cstore-desc">Sample design from ContribFest</p>
+              <ul class="cstore-chips" aria-label="Technologies">
+                <li>kubernetes</li>
+                
+              </ul>
+              <p class="cstore-meta">By Thomas Gleason <span aria-hidden="true">&middot;</span> Nov 12, 2026</p>
+            </div>
+          </a>
+        </li>
+        
+      
+        
+        
+        
+        
+        
+        
         <li class="cstore-card" data-name="Kubernetes Workload Controllers Overview" data-type="workloads" data-tech="kubernetes" data-created="2025-07-25 21:27:40 +0000" data-text="kubernetes workload controllers overview this design provides a high-level overview of the primary workload controllers in kubernetes, illustrating their relationship with pods. it is based on a diagram from the exoscale documentation, created to help users migrate and understand these core concepts within meshery. oseni abdulhaleem kubernetes">
           <a class="cstore-card-link" href="/catalog/workloads/kubernetes-workload-controllers-overview-1a9cfdfb-daaf-4c19-be93-6d9bc0f7b94d.html">
             <div class="cstore-thumb">
@@ -11046,6 +11132,33 @@
         
         
         
+        <li class="cstore-card" data-name="kubecon-shivay-design" data-type="workloads" data-tech="kubernetes" data-created="2026-11-12 21:51:24 +0000" data-text="kubecon-shivay-design kubecon contribfest shivay lamba kubernetes">
+          <a class="cstore-card-link" href="/catalog/workloads/kubecon-shivay-design-ede019cf-0457-47e2-8c81-e3e9ca3d1916.html">
+            <div class="cstore-thumb">
+              <img alt="Snapshot of the kubecon-shivay-design design" loading="lazy"
+                src="https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/ede019cf-0457-47e2-8c81-e3e9ca3d1916-light.png"
+                onerror="this.onerror=null;this.src='/assets/images/brand/meshery-logo.svg';this.parentNode.classList.add('cstore-thumb-fallback')">
+              <span class="cstore-badge">workloads</span>
+            </div>
+            <div class="cstore-body">
+              <h3 class="cstore-name">kubecon-shivay-design</h3>
+              <p class="cstore-desc">Kubecon Contribfest</p>
+              <ul class="cstore-chips" aria-label="Technologies">
+                <li>kubernetes</li>
+                
+              </ul>
+              <p class="cstore-meta">By Shivay Lamba <span aria-hidden="true">&middot;</span> Nov 12, 2026</p>
+            </div>
+          </a>
+        </li>
+        
+      
+        
+        
+        
+        
+        
+        
         <li class="cstore-card" data-name="Multi tenancy Virtual Cluster   " data-type="workloads" data-tech="kubernetes" data-created="2024-07-24 13:24:09 +0000" data-text="multi tenancy virtual cluster    virtual clusters are fully functional kubernetes clusters nested inside a physical host cluster providing better isolation and flexibility to support multi-tenancy. multiple teams can operate independently within the same physical infrastructure while minimizing conflicts, maximizing autonomy, and reducing costs.virtual clusters run inside host cluster namespaces but function as separate kubernetes clusters, with their own api server, control plane, syncer, and set of resources. while virtual clusters share the physical resources of the host cluster (such as cpu, memory, and storage), they manage their resources independently, allowing for efficient utilization and scaling.virtual clusters interact with the host cluster for resource scheduling and networking but maintain a level of abstraction to ensure operations within a virtual cluster don&#39;t directly affect the host cluster&#39;s global state. deepak reddy kubernetes">
           <a class="cstore-card-link" href="/catalog/workloads/multi-tenancy-virtual-cluster-f176d529-767d-485b-a68d-79db3f6e8dd2.html">
             <div class="cstore-thumb">
@@ -11144,14 +11257,15 @@
 .cstore-search-icon{position:absolute;left:16px;top:50%;width:22px;height:22px;transform:translateY(-50%);fill:var(--cs-muted)}
 #cstore-search{width:100%;box-sizing:border-box;padding:16px 18px 16px 50px;font-size:1.05rem;border:2px solid var(--cs-border);border-radius:999px;background:var(--cs-card);color:var(--cs-text)}
 #cstore-search:focus,.cstore-tech-search:focus,#cstore-sort:focus{outline:none;border-color:var(--cs-accent);box-shadow:0 0 0 3px rgba(0,179,159,.25)}
-.cstore-layout{display:grid;grid-template-columns:250px 1fr;gap:2rem}
+.cstore-layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:2rem}
+.cstore-main{min-width:0}
 @media(max-width:860px){.cstore-layout{grid-template-columns:1fr}}
 .cstore-filters{position:sticky;top:90px;align-self:start;background:var(--cs-card);border:1px solid var(--cs-border);border-radius:12px;padding:1rem;max-height:calc(100vh - 110px);overflow:auto}
 @media(max-width:860px){.cstore-filters{position:static;max-height:none}}
 .cstore-filters-head{display:flex;justify-content:space-between;align-items:center}
 .cstore-filters h2{font-size:1.1rem;margin:0;color:var(--cs-text)}
 .cstore-clear{background:none;border:0;color:var(--cs-accent);cursor:pointer;font-weight:600;padding:4px}
-.cstore-group{border:0;margin:1rem 0 0;padding:0}
+.cstore-group{border:0;margin:1rem 0 0;padding:0;width:100%;min-width:0;box-sizing:border-box}
 .cstore-group legend{font-weight:700;font-size:.85rem;text-transform:uppercase;letter-spacing:.05em;color:var(--cs-muted);margin-bottom:.5rem}
 .cstore-check{display:flex;align-items:center;gap:.5rem;padding:4px 0;cursor:pointer;color:var(--cs-text);font-size:.95rem;text-transform:none}
 .cstore .cstore-check,.cstore .cstore-check span{text-indent:0!important;padding-left:0}
@@ -11159,9 +11273,13 @@
 .cstore-check[hidden]{display:none}
 .cstore-tech-icon{width:20px;height:20px;flex:none;object-fit:contain}
 .cstore-count{margin-left:auto;color:var(--cs-muted);font-size:.8rem}
-.cstore-tech-search{width:100%;box-sizing:border-box;padding:8px 10px;border:1px solid var(--cs-border);border-radius:8px;background:var(--cs-bg);color:var(--cs-text);margin-bottom:.5rem;height:40px}
-.cstore-techs{max-height:300px;overflow:auto}
+.cstore-tech-search{display:block;width:100%;min-width:0;max-width:100%;box-sizing:border-box;padding:8px 10px;border:1px solid var(--cs-border);border-radius:8px;background:var(--cs-bg);color:var(--cs-text);margin-bottom:.5rem;height:40px}.cstore-techs{width:100%;min-width:0;max-height:300px;overflow-x:auto;overflow-y:auto}
 .cstore-toolbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:.5rem}
+.cstore-techs{display:grid;grid-template-columns:max-content;padding-right:8px;box-sizing:border-box}
+.cstore-techs .cstore-check{width:auto;min-width:0;max-width:none;box-sizing:border-box;display:flex;align-items:center}
+.cstore-techs .cstore-check>span:not(.cstore-count){white-space:nowrap;overflow-wrap:normal}
+.cstore-techs .cstore-count{margin-left:auto;flex-shrink:0}
+#cstore-cats{overflow:visible;max-height:none}
 .cstore-status{margin:0;color:var(--cs-muted)}
 .cstore-sort{display:flex;align-items:center;gap:.5rem;color:var(--cs-muted)}
 .cstore-sort label{margin-top:0}
@@ -11578,6 +11696,7 @@
 		</div>
 	</section>
 
+</main>
 
 <footer>
 	<div class="container">
@@ -11647,7 +11766,7 @@
 " class="forum-icon" >
 						
 						
-		<svg fill="#000000" height="18" viewBox="0 0 32 32" weight="18" xmlns="http://www.w3.org/2000/svg"><circle cx="22" cy="6.5" r="2.5"/><circle cx="10" cy="6.5" r="2.5"/><path d="M8,11h5.3a3.724,3.724,0,0,0-6.67.137A6.97,6.97,0,0,1,8,11Z"/><circle cx="22" cy="21.5" r="2.5"/><circle cx="10" cy="21.5" r="2.5"/><path d="M24,11a6.97,6.97,0,0,1,1.372.137A3.724,3.724,0,0,0,18.7,11Z"/><path d="M17.78,23a4.27,4.27,0,0,1-.28-1.5,4.5,4.5,0,0,1,9,0,4.2,4.2,0,0,1-.1.86A4.984,4.984,0,0,0,24,13H8a4.984,4.984,0,0,0-2.4,9.36,4.2,4.2,0,0,1-.1-.86,4.5,4.5,0,0,1,9,0,4.27,4.27,0,0,1-.28,1.5Z"/><path d="M25.75,27.75h0A3.75,3.75,0,0,0,22,24h0a3.75,3.75,0,0,0-3.75,3.75h0A1.25,1.25,0,0,0,19.5,29h5A1.25,1.25,0,0,0,25.75,27.75Z"/><path d="M6.25,27.75h0A3.75,3.75,0,0,1,10,24h0a3.75,3.75,0,0,1,3.75,3.75h0A1.25,1.25,0,0,1,12.5,29h-5A1.25,1.25,0,0,1,6.25,27.75Z"/></svg>
+		<svg fill="#000000" height="18" viewBox="0 0 32 32" width="18" xmlns="http://www.w3.org/2000/svg"><circle cx="22" cy="6.5" r="2.5"/><circle cx="10" cy="6.5" r="2.5"/><path d="M8,11h5.3a3.724,3.724,0,0,0-6.67.137A6.97,6.97,0,0,1,8,11Z"/><circle cx="22" cy="21.5" r="2.5"/><circle cx="10" cy="21.5" r="2.5"/><path d="M24,11a6.97,6.97,0,0,1,1.372.137A3.724,3.724,0,0,0,18.7,11Z"/><path d="M17.78,23a4.27,4.27,0,0,1-.28-1.5,4.5,4.5,0,0,1,9,0,4.2,4.2,0,0,1-.1.86A4.984,4.984,0,0,0,24,13H8a4.984,4.984,0,0,0-2.4,9.36,4.2,4.2,0,0,1-.1-.86,4.5,4.5,0,0,1,9,0,4.27,4.27,0,0,1-.28,1.5Z"/><path d="M25.75,27.75h0A3.75,3.75,0,0,0,22,24h0a3.75,3.75,0,0,0-3.75,3.75h0A1.25,1.25,0,0,0,19.5,29h5A1.25,1.25,0,0,0,25.75,27.75Z"/><path d="M6.25,27.75h0A3.75,3.75,0,0,1,10,24h0a3.75,3.75,0,0,1,3.75,3.75h0A1.25,1.25,0,0,1,12.5,29h-5A1.25,1.25,0,0,1,6.25,27.75Z"/></svg>
 	
 
 						
@@ -11857,7 +11976,8 @@
 
 	</div>
 </footer>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha384-vk5WoKIaW/vJyUAd9n/wmopsmNhiy+L2Z+SBxGYnUkunIxVxAv/UtMOhba/xskxh" crossorigin="anonymous"></script>
+
 
 <script src="/js/stellarnav.min.js"></script>
 
@@ -11871,97 +11991,15 @@
 		jQuery('.stellarnav.mobile').css('text-align', 'end');
 	});
 </script>
+
+
 <!--Script for Copy to Clipboard-->
-<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
-<script src="/js/vanilla-tilt.min.js"></script>
-
-<script>
-
-    // Functionality for the copy button next to the ID/UUID in Catalog Details
-
-	// function showCopyFeedback(element, message) {
-	// 	let wrapper = element.closest('.catalog-design-id-copy-wrapper');
-	// 	if (!wrapper) {
-	// 		return false;
-	// 	}
-
-	// 	let feedback = wrapper.querySelector('.copy-feedback');
-	// 	if (!feedback) {
-	// 		return false;
-	// 	}
-
-	// 	feedback.textContent = message;
-	// 	window.clearTimeout(element.copyFeedbackTimeout);
-	// 	element.copyFeedbackTimeout = window.setTimeout(function () {
-	// 		feedback.textContent = '';
-	// 	}, 1500);
-	// 	return true;
-	// }
-
-	function resetCopyText(element) {
-		let childElements = element.childNodes
-		if (childElements.length > 3) {
-			childElements[3].innerHTML = "Copy to clipboard";
-		} else {
-		childElements[1].innerHTML = "Copy URL";
-		childElements[1].style.color = 'white';
-		childElements[1].style.background = "#00b39fff";
-        }
-	}
 
 
-	var clipboard = new ClipboardJS('.btn');
-	clipboard.on('success', function (e) {
-		console.info('Action:', e.action);
-		console.info('Text:', e.text);
-		console.info('Trigger:', e.trigger);
-		let childElements = e.trigger.childNodes;
-        // ShowCopyFeedback serves as the primary check for the copy button in Catalog Details.
-        // If the copy button is enabled again, the conditional below needs to be encapsulate the childElements conditional
-		// if (!showCopyFeedback(e.trigger, "Copied!")) {}
 
-        if (childElements.length > 3) {
-			childElements[3].innerHTML = "Copied!";
-		} else {
-			childElements[1].innerHTML = "Copied";
-			childElements[1].style.color = 'white';
-			childElements[1].style.background = "#1a2421";
-		}
-		e.clearSelection();
-	});
-	clipboard.on('error', function (e) {
-		console.error('Action:', e.action);
-		console.error('Trigger:', e.trigger);
-		// showCopyFeedback(e.trigger, "Copy failed");
-	});
-</script>
 
-<script>
-	function displayCode(id) {
-		var divId = id + "_code";
-		var element = document.getElementById(divId);
-		var isOpening = !element.classList.contains("showDiv");
-		element.classList.toggle("showDiv");
-		var toggleDivs = document.getElementsByClassName("toggle");
-		if (element.style.maxHeight) {
-			element.style.maxHeight = null;
-		} else {
-			element.style.maxHeight = element.scrollHeight + "px";
-		}
-		for (let i = 0; i < toggleDivs.length; i++) {
-			if (toggleDivs[i] != element) {
-				toggleDivs[i].classList.remove("showDiv");
-				if (toggleDivs[i].style.maxHeight) {
-					toggleDivs[i].style.maxHeight = null;
-				}
-			}
-		}
-		var platformOptions = document.querySelectorAll(".platform-option");
-		platformOptions.forEach(function(option) {
-			option.classList.toggle("selected", option.id === id && isOpening);
-		});
-	}
-</script>
+
+
 <script type="text/javascript">
 	let toggleBtn = document.getElementById("mode-toggle-btn")
 	toggleBtn.onclick = setMode;
@@ -12006,40 +12044,7 @@
 
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script>
-  $(document).ready(function () {
-    $('.testimonials-slider').slick({
-      centerMode: true,
-      centerPadding: '0px',
-      dots: false,
-      arrows: false,
-      infinite: true,
-      speed: 400,
-      slidesToShow: 3,
-      slidesToScroll: 1,
-      autoplay: true,
-      autoplaySpeed: 1500,
 
-      responsive: [
-        {
-          breakpoint: 1140,
-          settings: {
-            slidesToShow: 2,
-            centerMode: false,
-          }
-        },
-        {
-          breakpoint: 800,
-          settings: {
-            slidesToShow: 1,
-            centerMode: false,
-          }
-        }
-      ]
-    });
-  });
-</script>
 </body>
 
 </html>
