@@ -179,7 +179,7 @@
 
 <!-- Sitewide Banner -->
 <div class="sitewide-banner hidden">
-  <p>Meshery is now a CNCF Incubating project.</p>
+  <p>Meshery is a CNCF Incubating project.</p>
   <p>
     <a href="https://www.cncf.io/blog/2026/10/07/meshery-becomes-a-cncf-incubating-project/">Read the announcement</a>
   </p>
@@ -559,13 +559,26 @@
 	<section class="page">
 		<div class="container ">	
 			
+					  
+						
+						
+						
+						<div>
+  
+  <h1 class="catalog-heading">Meshery Blog</h1>
+  
+
+  
+
+  
+    <p  class="catalog-subtext">Explore all Meshery blog posts, tutorials, and updates.</p>
+  
+</div>
 					   
 					
 				
 				
 
-			
-				<p class="subtext">Explore all Meshery blog posts, tutorials, and updates.</p>
 			
 			<div class="blog-container">
     <!-- Search Section -->
@@ -579,7 +592,7 @@
         />
         <button id="clear-search-btn" class="clear-search" title="Clear search" style="display:none;">×</button>
       </div>
-      <div id="search-summary" class="search-summary" style="display:none;"></div>
+      <div id="search-summary" class="search-summary" aria-live="polite" style="display:none;"></div>
     </div>
 
     <!-- Search Results (hidden by default) -->
@@ -1783,6 +1796,18 @@
   margin-bottom: 2rem;
 }
 
+.search-show-more-container {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.search-show-more-btn {
+  cursor: pointer;
+  padding: 0.6rem 1.5rem;
+  font-size: 1rem;
+}
+
 .search-highlight {
   background-color: rgba(0, 211, 169, 0.3);
   color: var(--brand-color-secondary);
@@ -2046,6 +2071,9 @@ ul.archive-months {
 </style>
 
 <!-- Blog Search Script -->
+<script>
+  window.blogSearchIndexVersion = "1793491200";
+</script>
 <script src="/js/blog-search.js"></script>
 
 		</div>
